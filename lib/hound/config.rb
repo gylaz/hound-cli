@@ -4,6 +4,11 @@ require "hound/default_linter"
 module Hound
   class Config
     CONFIG_FILENAME = ".hound.yml"
+    SUPPORTED_LINTER_NAMES = %w(
+      ruby
+      javascript
+      go
+    )
     ENABLED_LINTER_NAMES = %w(
       ruby
       javascript
@@ -16,12 +21,18 @@ module Hound
     end
 
     def configured_linters
-      content.map do |name, config|
+      configured_linter_names.map do |name, config|
         Linter.new(name: name, config: config)
       end
     end
 
     private
+
+    def configured_linter_names
+      content.select do |name, _|
+        SUPPORTED_LINTER_NAMES.include?(name)
+      end
+    end
 
     def unconfigured_linter_names
       ENABLED_LINTER_NAMES - configured_linters.map(&:name)
