@@ -38,12 +38,14 @@ describe Hound do
 
         expect(result).to eq <<-RESULT
 Ruby
-  - Enabled
-  - #{Hound::DefaultLinterConfig::STATUS}
+---------
+  Status: Enabled
+  Config: #{Hound::DefaultLinterConfig::STATUS}
 
 Javascript
-  - Enabled (default)
-  - #{Hound::DefaultLinterConfig::STATUS}
+---------
+  Status: Enabled (default)
+  Config: #{Hound::DefaultLinterConfig::STATUS}
         RESULT
       end
     end

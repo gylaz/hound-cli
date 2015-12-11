@@ -22,8 +22,9 @@ module Hound
   def self.linter_report(linter)
     <<-RESULT
 #{linter.name.capitalize}
-  - #{linter_status(linter)}
-  - #{linter.config_status}
+---------
+  Status: #{linter_status(linter)}
+  Config: #{linter.config_status}
     RESULT
   end
 

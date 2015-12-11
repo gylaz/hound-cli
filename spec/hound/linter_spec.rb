@@ -22,7 +22,7 @@ describe Hound::Linter do
 
         result = linter.config_status
 
-        expect(result).to eq "Config file path/to/nothing does not exist"
+        expect(result).to eq "path/to/nothing does not exist"
       end
     end
 
