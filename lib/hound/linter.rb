@@ -36,7 +36,7 @@ module Hound
     end
 
     def linter_config
-      LinterConfig.new(name: name, filepath: config_filepath)
+      LinterConfig.new(config_filepath)
     end
 
     def config_filepath

@@ -8,7 +8,7 @@ describe Hound do
   describe ".config" do
     context "when .hound.yml is not valid Yaml" do
       it "returns helpful message" do
-        stub_hound_config <<-CONFIG
+        stub_file ".hound.yml",  <<-CONFIG
           blahh:
           blahh
         CONFIG
@@ -29,7 +29,7 @@ describe Hound do
 
     context "when a language is explicitly enabled" do
       it "returns a message explaining which languages are enabled" do
-        stub_hound_config <<-CONFIG
+        stub_file ".hound.yml", <<-CONFIG
           ruby:
             enabled: true
         CONFIG
@@ -49,9 +49,5 @@ Javascript
         RESULT
       end
     end
-  end
-
-  def stub_hound_config(config_content)
-    allow(File).to receive(:read).with(".hound.yml").and_return(config_content)
   end
 end
