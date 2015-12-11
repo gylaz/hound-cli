@@ -1,6 +1,3 @@
-require "delegate"
-require "json"
-
 module Hound
   module Linter
     class Javascript < SimpleDelegator
@@ -16,7 +13,7 @@ module Hound
         JSON.parse(File.read(filepath))
         "Using #{filepath}"
       rescue JSON::ParserError
-        "#{filepath} is invalid JSON"
+        "#{filepath} is invalid JSON".colorize(:red)
       end
     end
   end

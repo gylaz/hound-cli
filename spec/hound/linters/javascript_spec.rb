@@ -26,7 +26,7 @@ describe Hound::Linter::Javascript do
       it "returns an error message" do
         linter = build_linter(".foo-style.yml")
 
-        expect(linter.config).to eq ".foo-style.yml does not exist"
+        expect(linter.config).to include ".foo-style.yml does not exist"
       end
     end
 
@@ -44,7 +44,7 @@ describe Hound::Linter::Javascript do
         stub_file(filepath, "")
         linter = build_linter(filepath)
 
-        expect(linter.config).to eq "#{filepath} is invalid JSON"
+        expect(linter.config).to include "#{filepath} is invalid JSON"
       end
     end
   end

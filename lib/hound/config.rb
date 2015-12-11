@@ -1,10 +1,3 @@
-require "yaml"
-
-require "hound/linters/base"
-require "hound/linters/ruby"
-require "hound/linters/javascript"
-require "hound/linters/go"
-
 module Hound
   class Config
     CONFIG_FILENAME = ".hound.yml"

@@ -1,5 +1,3 @@
-require "delegate"
-
 module Hound
   class MissingLinterConfig < SimpleDelegator
     def status

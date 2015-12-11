@@ -1,5 +1,3 @@
-require "yaml"
-
 module Hound
   module Linter
     class Base
@@ -32,7 +30,7 @@ module Hound
           "Not provided -- using default"
         end
       rescue Errno::ENOENT
-        "#{filepath} does not exist"
+        "#{filepath} does not exist".colorize(:red)
       end
 
       private

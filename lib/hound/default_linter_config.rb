@@ -1,5 +1,3 @@
-require "delegate"
-
 module Hound
   class DefaultLinterConfig < SimpleDelegator
     STATUS = "Using default config"

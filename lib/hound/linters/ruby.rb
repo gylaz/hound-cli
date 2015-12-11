@@ -1,5 +1,3 @@
-require "delegate"
-
 module Hound
   module Linter
     class Ruby < SimpleDelegator
@@ -15,7 +13,7 @@ module Hound
         YAML.load(File.read(filepath))
         "Using #{filepath}"
       rescue Psych::SyntaxError
-        "#{filepath} is invalid YAML"
+        "#{filepath} is invalid YAML".colorize(:red)
       end
     end
   end

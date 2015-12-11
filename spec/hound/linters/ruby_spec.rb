@@ -1,6 +1,3 @@
-require "hound/linters/base"
-require "hound/linters/ruby"
-
 describe Hound::Linter::Ruby do
   describe "#status" do
     it "delegates to base linter" do
@@ -26,7 +23,7 @@ describe Hound::Linter::Ruby do
       it "returns an error message" do
         linter = build_linter(".foo-style.yml")
 
-        expect(linter.config).to eq ".foo-style.yml does not exist"
+        expect(linter.config).to include ".foo-style.yml does not exist"
       end
     end
 
@@ -44,7 +41,7 @@ describe Hound::Linter::Ruby do
         stub_file(filepath, "Enabled:\ntrue")
         linter = build_linter(filepath)
 
-        expect(linter.config).to eq "#{filepath} is invalid YAML"
+        expect(linter.config).to include "#{filepath} is invalid YAML"
       end
     end
   end

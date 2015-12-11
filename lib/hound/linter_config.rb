@@ -1,5 +1,3 @@
-require "yaml"
-
 module Hound
   class LinterConfig
     attr_reader :filepath

@@ -1,5 +1,14 @@
+require "colorize"
+require "delegate"
+require "json"
+require "yaml"
+
 require "hound/version"
 require "hound/config"
+require "hound/linters/base"
+require "hound/linters/ruby"
+require "hound/linters/javascript"
+require "hound/linters/go"
 
 module Hound
   USING_DEFAULTS = "You are using the Hound defaults. Add a .hound.yml to configure Hound."

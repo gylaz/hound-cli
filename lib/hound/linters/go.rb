@@ -1,5 +1,3 @@
-require "delegate"
-
 module Hound
   module Linter
     class Go < SimpleDelegator
