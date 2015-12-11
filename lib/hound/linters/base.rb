@@ -21,26 +21,23 @@ module Hound
         end
       end
 
-      def config
+      def filepath
+        options["config_file"]
+      end
+
+      def handle_config_errors
         if filepath
-          YAML.load(File.read(filepath))
-          "Using #{filepath}"
+          yield
         else
           "Not provided -- using default"
         end
       rescue Errno::ENOENT
         "#{filepath} does not exist"
-      rescue Psych::SyntaxError
-        "#{filepath} is invalid Yaml"
       end
 
       private
 
       attr_reader :options
-
-      def filepath
-        options["config_file"]
-      end
 
       def enabled?
         options.fetch("enabled", true)
