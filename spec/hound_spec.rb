@@ -1,3 +1,5 @@
+require "hound"
+
 describe Hound do
   it "has a version number" do
     expect(Hound::VERSION).not_to be nil
@@ -37,8 +39,11 @@ describe Hound do
         expect(result).to eq <<-RESULT
 Ruby
   - Enabled
+  - #{Hound::DefaultLinterConfig::STATUS}
+
 Javascript
   - Enabled (default)
+  - #{Hound::DefaultLinterConfig::STATUS}
         RESULT
       end
     end

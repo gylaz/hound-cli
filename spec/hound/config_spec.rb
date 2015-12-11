@@ -1,3 +1,5 @@
+require "hound/config"
+
 describe Hound::Config do
   describe "#unconfigured_linters" do
     context "when a linter is configured" do

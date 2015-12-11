@@ -1,5 +1,6 @@
 require "hound/linter"
 require "hound/default_linter"
+require "yaml"
 
 module Hound
   class Config
@@ -16,13 +17,13 @@ module Hound
 
     def unconfigured_linters
       unconfigured_linter_names.map do |name|
-        DefaultLinter.new(Linter.new(name: name, config: {}))
+        DefaultLinter.new(Linter.new(name: name, options: {}))
       end
     end
 
     def configured_linters
-      configured_linter_names.map do |name, config|
-        Linter.new(name: name, config: config)
+      configured_linter_names.map do |name, options|
+        Linter.new(name: name, options: options)
       end
     end
 
