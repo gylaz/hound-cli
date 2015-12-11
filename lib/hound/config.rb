@@ -1,42 +1,34 @@
-require "hound/linter"
-require "hound/default_linter"
 require "yaml"
+
+require "hound/linters/base"
+require "hound/linters/ruby"
+require "hound/linters/javascript"
+require "hound/linters/go"
 
 module Hound
   class Config
     CONFIG_FILENAME = ".hound.yml"
-    SUPPORTED_LINTER_NAMES = %w(
+    LINTER_NAMES = %w(
       ruby
       javascript
       go
     )
-    ENABLED_LINTER_NAMES = %w(
-      ruby
-      javascript
-    )
 
-    def unconfigured_linters
-      unconfigured_linter_names.map do |name|
-        DefaultLinter.new(Linter.new(name: name, options: {}))
-      end
-    end
-
-    def configured_linters
-      configured_linter_names.map do |name, options|
-        Linter.new(name: name, options: options)
+    def linters
+      LINTER_NAMES.map do |name|
+        build_linter(name, content[name])
       end
     end
 
     private
 
-    def configured_linter_names
-      content.select do |name, _|
-        SUPPORTED_LINTER_NAMES.include?(name)
-      end
-    end
+    def build_linter(name, options)
+      base_linter = Linter::Base.new(name: name, options: options)
+      linter_class = "Hound::Linter::#{name.capitalize}".
+        split("::").
+        reduce(Object) { |object, constant| object.const_get(constant) }
 
-    def unconfigured_linter_names
-      ENABLED_LINTER_NAMES - configured_linters.map(&:name)
+      linter_class.new(base_linter)
     end
 
     def content

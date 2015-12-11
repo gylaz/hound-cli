@@ -2,8 +2,8 @@ require "delegate"
 
 module Hound
   class DefaultLinter < SimpleDelegator
-    def enabled?
-      true
+    def status
+      "Enabled by default"
     end
 
     def default?

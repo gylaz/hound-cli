@@ -32,6 +32,8 @@ describe Hound do
         stub_file ".hound.yml", <<-CONFIG
           ruby:
             enabled: true
+          go:
+            enabled: false
         CONFIG
 
         result = Hound.config
@@ -40,12 +42,17 @@ describe Hound do
 Ruby
 ---------
   Status: Enabled
-  Config: #{Hound::DefaultLinterConfig::STATUS}
+  Config: Not provided -- using default
 
 Javascript
 ---------
-  Status: Enabled (default)
-  Config: #{Hound::DefaultLinterConfig::STATUS}
+  Status: Enabled
+  Config: Not provided -- using default
+
+Go
+---------
+  Status: Disabled
+  Config: Does not support configuration
         RESULT
       end
     end

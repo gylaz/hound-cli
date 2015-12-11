@@ -5,10 +5,7 @@ module Hound
   USING_DEFAULTS = "You are using the Hound defaults. Add a .hound.yml to configure Hound."
 
   def self.config
-    config = Config.new
-    linters = config.configured_linters + config.unconfigured_linters
-
-    report(linters)
+    report(Config.new.linters)
   rescue Psych::SyntaxError
     "Your .hound.yml file is not valid Yaml"
   rescue Errno::ENOENT
@@ -23,22 +20,8 @@ module Hound
     <<-RESULT
 #{linter.name.capitalize}
 ---------
-  Status: #{linter_status(linter)}
-  Config: #{linter.config_status}
+  Status: #{linter.status}
+  Config: #{linter.config}
     RESULT
-  end
-
-  def self.linter_status(linter)
-    if linter.enabled?
-      status = "Enabled"
-
-      if linter.default?
-        status + " (default)"
-      else
-        status
-      end
-    else
-      "Disabled"
-    end
   end
 end
