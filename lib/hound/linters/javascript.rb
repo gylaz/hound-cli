@@ -2,18 +2,9 @@ module Hound
   module Linter
     class Javascript < SimpleDelegator
       def config
-        handle_config_errors do
-          parse_config
-        end
-      end
-
-      private
-
-      def parse_config
-        JSON.parse(File.read(filepath))
-        "Using #{filepath}"
+        parse_config_result { |file_content| JSON.parse(file_content) }
       rescue JSON::ParserError
-        "#{filepath} is invalid JSON".colorize(:red)
+        Format.error("#{filepath} is invalid JSON")
       end
     end
   end

@@ -23,14 +23,15 @@ module Hound
         options["config_file"]
       end
 
-      def handle_config_errors
+      def parse_config_result &parse_command
         if filepath
-          yield
+          parse_command.call(file_content)
+          "Using #{filepath}"
         else
           "Not provided -- using default"
         end
       rescue Errno::ENOENT
-        "#{filepath} does not exist".colorize(:red)
+        Format.error("#{filepath} does not exist")
       end
 
       private
@@ -39,6 +40,10 @@ module Hound
 
       def enabled?
         options.fetch("enabled", true)
+      end
+
+      def file_content
+        File.read(filepath)
       end
 
       def options
