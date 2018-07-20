@@ -1,10 +1,10 @@
-require "colorize"
 require "delegate"
 require "json"
 require "yaml"
 
 require "hound/version"
 require "hound/config"
+require "hound/format"
 require "hound/linters/base"
 require "hound/linters/ruby"
 require "hound/linters/javascript"

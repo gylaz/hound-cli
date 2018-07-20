@@ -32,9 +32,11 @@ describe Hound do
         stub_file ".hound.yml", <<-CONFIG
           ruby:
             enabled: true
+            config_file: .ruby-style.yml
           go:
             enabled: false
         CONFIG
+        stub_file(".ruby-style.yml", "").and_raise(Errno::ENOENT)
 
         result = Hound.config
 
@@ -42,7 +44,7 @@ describe Hound do
 Ruby
 ---------
   Status: Enabled
-  Config: Not provided -- using default
+  Config: \e[31m.ruby-style.yml does not exist\e[0m
 
 Javascript
 ---------

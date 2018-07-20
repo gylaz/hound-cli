@@ -2,18 +2,9 @@ module Hound
   module Linter
     class Ruby < SimpleDelegator
       def config
-        handle_config_errors do
-          parse_config
-        end
-      end
-
-      private
-
-      def parse_config
-        YAML.load(File.read(filepath))
-        "Using #{filepath}"
+        parse_config_result { |file_content| YAML.load(file_content) }
       rescue Psych::SyntaxError
-        "#{filepath} is invalid YAML".colorize(:red)
+        Format.error("#{filepath} is invalid YAML")
       end
     end
   end
