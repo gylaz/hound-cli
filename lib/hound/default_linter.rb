@@ -3,6 +3,7 @@ module Hound
     def status
       "Enabled by default foo                                adfa               adfasd      adfas"
       "Enabled by default"
+      'Enabled by default'
     end
 
     def default?
