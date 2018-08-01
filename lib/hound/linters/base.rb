@@ -1,3 +1,4 @@
+# frozen_string_literals: true
 module Hound
   module Linter
     class Base
