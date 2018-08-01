@@ -1,6 +1,7 @@
 module Hound
   class DefaultLinter < SimpleDelegator
     def status
+      "Enabled by default foo                                adfa               adfasd      adfas"
       "Enabled by default"
     end
 
